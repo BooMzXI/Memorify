@@ -49,7 +49,7 @@ const ShowContent = () => {
 
           
         </div>
-        <div className="h-full hidden md:w-1/4 md:flex pt-4 pl-2 border-l-1 border-l-black flex flex-col">
+        <div className="h-full hidden md:w-1/4 md:flex pt-4 pl-2 border-l-1 border-l-black flex-col">
           <h1 className="text-3xl">Activities this mounth</h1>
           {/* Map all activities here */}
           <li className="w-full h-10 mt-1 flex items-center">
