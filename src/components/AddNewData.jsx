@@ -1,30 +1,40 @@
+'use client'
 
+import React from 'react'
 import '@/app/ResponsivePage.css'
+import TagPanel from './TagPanel'
 
 const AddNewData = ({ isAddDialogVisible , setIsAddDialogVisible }) => {
+    const [isTagPanelOpen , setIsTagPanelOpen] = React.useState(false)
+    const opentagPanel = () => {
+        setIsTagPanelOpen((prev) => !prev)
+    }
   return (
     <div> {isAddDialogVisible && (
-        <div className="databox w-1/2 h-1/2 p-2 bg-white border-1 border-black absolute top-[15%] right-1/4 rounded-4xl">
+        <div className="databox w-full md:w-1/2 md:h-1/2 p-2 bg-white border-1 border-black absolute top-[15%] right-0 md:right-1/4 md:rounded-xl">
             <div className="w-full h-[10%] flex p-2 items-center text-2xl">Add new data</div>
-            <div className="w-full h-[50%] flex">
+            <div className="w-full h-[60%] md:h-[50%] flex">
                 <div className="w-[30%] flex justify-center items-center">
-                    <div className="w-1/2 h-full bg-amber-300"></div>
+                    <div className="w-full h-full bg-amber-300"></div>
                 </div>
-                <div className="w-[70%] p-2 flex flex-col">
+                <div className="w-[70%] pl-2 pt-2 pr-2 flex flex-col">
                     <p className="text-2xl">Title</p>
                     <input className="p-1 w-full h-7 border-b-1 border-gray-400 mb-2 placeholder-gray-400 
                                 focus:outline-none pt-3 leading-normal" type="text" placeholder="Title.."/>
-                    <div className="w-full h-full flex gap-3">
-                        <p className="text-2xl">Tags</p>
-                        <button type="button" className="w-20 h-3/4 rounded-xl cursor-pointer bg-red-500 flex items-center justify-center">
+                    <div className="w-full h-full flex gap-3 items-center">
+                        <p className="text-xl md:text-2xl">Tags</p>
+                        <button type="button"
+                         className="w-20 h-5 md:h-2/4 rounded-xl cursor-pointer bg-red-500 text-white flex items-center justify-center"
+                         onClick={opentagPanel}
+                         >
                             <span className="material-symbols-outlined">add</span>
                             <p>ADD</p>
                         </button>
                     </div>
-                    <div className="w-full h-full bg-white border-1 border-black flex items-center justify-center p-2"></div>
+                    <div className="w-full h-full bg-white md:border-1 border-black flex items-center justify-center p-2"></div>
                 </div>
             </div>
-            <div className="w-full h-[27%]  mt-2">
+            <div className="w-full h-[20%] md:h-[25%] mt-2">
                 <div className="w-full h-[20%] ">Discription:</div>
                 <input 
                     type="text" 
@@ -39,6 +49,7 @@ const AddNewData = ({ isAddDialogVisible , setIsAddDialogVisible }) => {
                 <button onClick={() => setIsAddDialogVisible(false)} type="button" className="w-10 h-5 cursor-pointer bg-transparent text-cyan-400">CANCLE</button>
                 <button type="button" className="w-10 h-5 cursor-pointer bg-transparent text-cyan-400">ADD</button>
             </div>
+            <TagPanel isTagPanelOpen={isTagPanelOpen} setIsTagPanelOpen={setIsTagPanelOpen}/>
         </div>
     )}
     </div>

@@ -2,11 +2,10 @@ import ShowContent from "@/components/ShowContent";
 
 const Home = () => {
   return (
-    <div>
-        <div className="Container w-[100%] overflow-y-hidden h-[calc(100vh-80px)] flex">
-            <ShowContent />
-        </div>
+    <div className="w-full h-[calc(100vh-80px)] flex">
+      <ShowContent />
     </div>
-  )
-}
-export default Home
+  );
+};
+
+export default Home;

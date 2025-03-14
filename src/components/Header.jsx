@@ -20,9 +20,11 @@ const Header = () => {
             <div className="w-[420px] h-full flex items-center justify-center">
                 <SearchBar />
             </div>
-            <div className="w-40 h-auto flex justify-between p-2">
-                <div className="w-10 h-10 rounded-4xl bg-white"></div>
-                <div className="h-full w-[50%] flex items-center">
+            <div className="w-40 h-auto flex justify-between p-2 gap-2">
+                <div className="w-10 h-10 rounded-4xl bg-white flex items-center justify-center border-1 border-black">
+                    <span className="material-symbols-outlined">question_mark</span>
+                </div>
+                <div className="h-full w-[60%] flex items-center">
                     <div className="w-10 h-10 rounded-4xl bg-white"></div>
                     <span className="material-symbols-outlined text-[100px] text-white">arrow_drop_down</span>
                 </div>

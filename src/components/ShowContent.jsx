@@ -5,47 +5,65 @@ import DataBox from "./DataBox";
 import SortedBox from "./Sorted";
 import AddNewData from "./AddNewData";
 import '@/app/ResponsivePage.css';
+import './Effect.css'
+import ActivitiesPanel from "./MB_ActivitiesDialog";
 
 const ShowContent = () => {
   const [isAddDialogVisible, setIsAddDialogVisible] = React.useState(false);
-
+  const [isActivitiesOpen, setIsActivitiesOpen] = React.useState(false);
   const openAddDialog = () => {
     setIsAddDialogVisible((prev) => !prev);
   };
-
+  const openActivitie = () => {
+    setIsActivitiesOpen((prev) => !prev);
+  }
   return (
-    <div className="h-[calc(100vh-80px)] w-full mt-4 flex md:flex-row justify-center gap-10">
+    <div className=" h-[calc(100vh-80px)] w-full mt-4 flex justify-end">
+      {(isAddDialogVisible || isActivitiesOpen) && (
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] transition-all duration-300"></div>
+      )}
+      <div className="h-full w-full md:w-[80%] flex">
+        <div className="h-full w-full md:w-3/4 flex flex-col items-center">
+
+          <SortedBox />
+
+          <div className="w-full h-10 gap-2 flex items-center justify-center mt-3">
+            <button 
+            type="button" 
+            onClick={openAddDialog} 
+            className="md:w-40 w-20 h-full bg-gray-800 rounded-2xl text-white flex items-center justify-center text-[15px] cursor-pointer">
+              <span class="material-symbols-outlined">add</span>
+              <p>ADD</p>
+            </button>
+            <button type="button" 
+            className="md:hidden w-20 h-full bg-gray-800 rounded-2xl text-white flex items-center justify-center texts-[15px] cursor-pointer"
+            onClick={openActivitie}
+            >
+              <p>Activities</p>
+            </button>
+          </div>
+
+        <div className="w-full h-full pt-4 flex flex-col p-2 overflow-y-auto">
+          {/* map data to databox here */}
+        </div>
+
+          
+        </div>
+        <div className="h-full hidden md:w-1/4 md:flex pt-4 pl-2 border-l-1 border-l-black flex flex-col">
+          <h1 className="text-3xl">Activities this mounth</h1>
+          {/* Map all activities here */}
+          <li className="w-full h-10 mt-1 flex items-center">
+            <div className="h-full w-[60%] flex items-center"> 
+              <span className="w-2 h-2 rounded-full mr-2 bg-green-700"></span>
+              <div className="text-[16px]">{/* Activities Here */}</div>
+            </div>
+            <div className="h-full w-[40%] flex items-center justify-end pr-2">{/* Time here */}</div>
+          </li> 
+    
+        </div>
+      </div>
       
-      {/* Left side content */}
-      <div className="fixedContentTocenter h-full w-full md:w-[40%] flex flex-col items-center">
-        
-        <SortedBox />
-
-        <div className="w-full h-10 flex items-center p-2 justify-center mt-3">
-          <button onClick={openAddDialog}
-            type="button"
-            className="w-32 h-8 flex items-center justify-center cursor-pointer bg-gray-800 rounded-[8px] text-white">
-            <span className="material-symbols-outlined">add</span>
-            <p className="text-[14px]">ADD</p>
-          </button>
-        </div>
-
-        <div className="w-full h-[550px] mt-4 overflow-auto">
-          {/*    Show all data here    */}
-        <DataBox />
-        </div>
-      </div>
-
-      {/* Right side content for showing activities */}
-      <div className="showActivities w-full md:w-1/4 h-[calc(100vh-80px)] border-b-black border-l-1 absolute md:relative left-0 pl-2 mt-4 md:mt-0">
-        <h1 className="mt-2 w-full h-10 p-2 text-3xl flex items-center">Activities this month</h1>
-
-        {/* Activity Box */}
-        <div className="mt-4 w-full h-7 flex items-center p-1 justify-between">
-          <div className="w-2 h-2 rounded-full bg-green-800"></div>
-        </div>
-      </div>
-
+      <ActivitiesPanel isActivitiesOpen={isActivitiesOpen} setIsActivitiesOpen={setIsActivitiesOpen} />
       <AddNewData isAddDialogVisible={isAddDialogVisible} setIsAddDialogVisible={setIsAddDialogVisible} />
     </div>
   );
