@@ -32,7 +32,7 @@ const ShowContent = () => {
             type="button" 
             onClick={openAddDialog} 
             className="md:w-40 w-20 h-full bg-gray-800 rounded-2xl text-white flex items-center justify-center text-[15px] cursor-pointer">
-              <span class="material-symbols-outlined">add</span>
+              <span className="material-symbols-outlined">add</span>
               <p>ADD</p>
             </button>
             <button type="button" 
