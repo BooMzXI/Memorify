@@ -12,6 +12,7 @@ export async function POST(req) {
         if (rows[0].password !== account.password){
             return Response.json({success: false, error: "Wrong password"})
         }
+        await createSession(account.username)
         return Response.json({success: true})
     } catch (error) {
         return Response.json({ success: false, error: "An error occurred during login." })

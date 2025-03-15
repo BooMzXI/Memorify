@@ -37,6 +37,7 @@ export const handleLogin = async (username , password) => {
             return alert("Incorrect username or password")
         }
         console.log("Success login")
+        window.location.href = "/home"
     } catch (err) {
         return console.log(err)
     }
