@@ -1,6 +1,28 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { login } from "@/actions/auth";
 
 export default function LoginPage() {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const router = useRouter();
+
+  const handleLoginDataSubmit = async (e) => {
+    e.preventDefault()
+    if (!username || !password)
+      return;
+    const redirectUrl = await login(username, password);
+    if (redirectUrl) {
+      router.push(redirectUrl);
+    } else {
+      alert("Invalid username or password");
+    }
+  }
+
   return (
     <>
       <div className="h-screen flex items-center justify-center bg-gray-800">
@@ -9,7 +31,7 @@ export default function LoginPage() {
             Log In
           </h2>
 
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleLoginDataSubmit}>
             <div>
               <label htmlFor="username" className="block text-gray-700 mb-2">
                 Username
@@ -19,6 +41,8 @@ export default function LoginPage() {
                 id="username"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
                 placeholder="Enter your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
@@ -31,6 +55,8 @@ export default function LoginPage() {
                 id="password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
