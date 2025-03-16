@@ -11,6 +11,17 @@ import ActivitiesPanel from "./MB_ActivitiesDialog";
 const ShowContent = () => {
   const [isAddDialogVisible, setIsAddDialogVisible] = React.useState(false);
   const [isActivitiesOpen, setIsActivitiesOpen] = React.useState(false);
+  const [contents, setContent] = React.useState([]);
+
+
+  React.useEffect(() => {
+    loadContent();
+  }, [])
+  const loadContent = async () => {
+    const res = await fetch("/api/content/get");
+    const data = await res.json();
+    setContent(data);
+  }
   const openAddDialog = () => {
     setIsAddDialogVisible((prev) => !prev);
   };
@@ -64,7 +75,10 @@ const ShowContent = () => {
       </div>
       
       <ActivitiesPanel isActivitiesOpen={isActivitiesOpen} setIsActivitiesOpen={setIsActivitiesOpen} />
-      <AddNewData isAddDialogVisible={isAddDialogVisible} setIsAddDialogVisible={setIsAddDialogVisible} />
+      <AddNewData isAddDialogVisible={isAddDialogVisible} setIsAddDialogVisible={setIsAddDialogVisible} loadContent={loadContent} />
+      {contents.map((val, index) => (
+        <DataBox key={index} title={val.title} description={val.description} timestamp={val.timestamp} />
+      ))}
     </div>
   );
 };
