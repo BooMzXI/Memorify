@@ -2,7 +2,7 @@ import Link from "next/link"
 const Sidebar = ({ isOpen }) => {
   return (
     <div>
-        <div className={`w-64 h-[calc(100vh-64px)] flex flex-col bg-gray-800 absolute transition-transform duration-300 ${
+        <div className={`w-64 h-[calc(100vh-64px)] flex flex-col bg-gray-800 absolute transition-transform duration-300 z-20 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <ul>
                 <Link href="/" className="mt-10 w-full h-10 text-white text-2xl flex items-center justify-center" >

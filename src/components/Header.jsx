@@ -2,7 +2,6 @@
 
 import React from 'react'
 import '@/app/googleFont.css'
-import SearchBar from './SeachBar'
 import Sidebar from './Sidebar'
 
 const Header = () => {
@@ -18,7 +17,6 @@ const Header = () => {
                 <span className="material-symbols-outlined text-3xl text-white">menu</span>
             </button>
             <div className="w-[420px] h-full flex items-center justify-center">
-                <SearchBar />
             </div>
             <div className="w-40 h-auto flex justify-between p-2 gap-2">
                 <div className="w-10 h-10 rounded-4xl bg-white flex items-center justify-center border-1 border-black">

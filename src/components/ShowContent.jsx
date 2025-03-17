@@ -7,12 +7,15 @@ import AddNewData from "./AddNewData";
 import '@/app/ResponsivePage.css';
 import './Effect.css'
 import ActivitiesPanel from "./MB_ActivitiesDialog";
+import { Time } from "@/app/function/Time"
+import SearchBar from "./SeachBar";
 
 const ShowContent = () => {
   const [isAddDialogVisible, setIsAddDialogVisible] = React.useState(false);
   const [isActivitiesOpen, setIsActivitiesOpen] = React.useState(false);
   const [contents, setContent] = React.useState([]);
-
+  const [searchInput , setSearchInput] = React.useState('')
+  const [filteredContents, setFilteredContents] = React.useState([])
 
   React.useEffect(() => {
     loadContent();
@@ -28,6 +31,14 @@ const ShowContent = () => {
   const openActivitie = () => {
     setIsActivitiesOpen((prev) => !prev);
   }
+
+  React.useEffect(() => {
+    const filter = contents.filter((content) => {
+      return content.title.toLowerCase().includes(searchInput.toLowerCase())
+    })
+    setFilteredContents(filter)
+  },[searchInput , contents])
+  
   return (
     <div className=" h-[calc(100vh-80px)] w-full mt-4 flex justify-end">
       {(isAddDialogVisible || isActivitiesOpen) && (
@@ -36,7 +47,7 @@ const ShowContent = () => {
       <div className="h-full w-full md:w-[80%] flex">
         <div className="h-full w-full md:w-3/4 flex flex-col items-center">
 
-          <SortedBox />
+          <SortedBox contents={contents || []} setContent={setContent} />
 
           <div className="w-full h-10 gap-2 flex items-center justify-center mt-3">
             <button 
@@ -54,31 +65,42 @@ const ShowContent = () => {
             </button>
           </div>
 
+        <div className="w-full h-20 flex justify-center items-center">
+          <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+        </div>
+
         <div className="w-full h-full pt-4 flex flex-col p-2 overflow-y-auto">
-          {/* map data to databox here */}
+          {filteredContents.map((val, index) => (
+            <DataBox 
+            key={index} 
+            title={val.title} 
+            description={val.description} 
+            timestamp={val.timestamp} />
+          ))}
         </div>
 
           
         </div>
         <div className="h-full hidden md:w-1/4 md:flex pt-4 pl-2 border-l-1 border-l-black flex-col">
           <h1 className="text-3xl">Activities this mounth</h1>
-          {/* Map all activities here */}
-          <li className="w-full h-10 mt-1 flex items-center">
-            <div className="h-full w-[60%] flex items-center"> 
-              <span className="w-2 h-2 rounded-full mr-2 bg-green-700"></span>
-              <div className="text-[16px]">{/* Activities Here */}</div>
-            </div>
-            <div className="h-full w-[40%] flex items-center justify-end pr-2">{/* Time here */}</div>
-          </li> 
+          {contents.length > 0 && (
+            contents.map((val, i) => (
+            <li key={i} className="w-full h-10 mt-1 flex items-center">
+              <div className="h-full w-[60%] flex items-center"> 
+                <span className="w-2 h-2 rounded-full mr-2 bg-green-700"></span>
+                <div className="text-[16px]">{val.title}</div>
+              </div>
+              <div className="h-full w-[40%] flex items-center justify-end pr-2">{Time(val.timestamp)}</div>
+            </li> 
+            ))  
+          )}
+          
     
         </div>
       </div>
       
-      <ActivitiesPanel isActivitiesOpen={isActivitiesOpen} setIsActivitiesOpen={setIsActivitiesOpen} />
+      <ActivitiesPanel isActivitiesOpen={isActivitiesOpen} setIsActivitiesOpen={setIsActivitiesOpen} contents={contents} />
       <AddNewData isAddDialogVisible={isAddDialogVisible} setIsAddDialogVisible={setIsAddDialogVisible} loadContent={loadContent} />
-      {contents.map((val, index) => (
-        <DataBox key={index} title={val.title} description={val.description} timestamp={val.timestamp} />
-      ))}
     </div>
   );
 };

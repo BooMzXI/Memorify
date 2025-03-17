@@ -19,9 +19,3 @@ export async function deleteSession() {
   const cookieStore = await cookies()
   cookieStore.delete('session')
 }
-
-/*
-export async function checkSession() {
-    const session = decodeURIComponent(cookies.get('session'));
-    console.log(session)
-} */
