@@ -16,6 +16,8 @@ const ShowContent = () => {
   const [contents, setContent] = React.useState([]);
   const [searchInput , setSearchInput] = React.useState('')
   const [filteredContents, setFilteredContents] = React.useState([])
+  const [addTag , setAddTag] = React.useState([])
+
 
   React.useEffect(() => {
     loadContent();
@@ -74,8 +76,11 @@ const ShowContent = () => {
             <DataBox 
             key={index} 
             title={val.title} 
-            description={val.description} 
-            timestamp={val.timestamp} />
+            description={val.description}
+            image={val.image}
+            tag={val.tag}
+            timestamp={val.timestamp}
+            loadContent={loadContent} />
           ))}
         </div>
 
@@ -100,7 +105,7 @@ const ShowContent = () => {
       </div>
       
       <ActivitiesPanel isActivitiesOpen={isActivitiesOpen} setIsActivitiesOpen={setIsActivitiesOpen} contents={contents} />
-      <AddNewData isAddDialogVisible={isAddDialogVisible} setIsAddDialogVisible={setIsAddDialogVisible} loadContent={loadContent} />
+      <AddNewData isAddDialogVisible={isAddDialogVisible} setIsAddDialogVisible={setIsAddDialogVisible} loadContent={loadContent} addTag={addTag} setAddTag={setAddTag} />
     </div>
   );
 };

@@ -3,17 +3,22 @@
 import React from "react"
 import Link from "next/link"
 import { handleLogin } from '@/function/StoredUser'
+import { useRouter } from "next/navigation"
 
 const LoginPanel = () => {
     const [username , setUsername] = React.useState('')
     const [password , setPassword] = React.useState('')
+    const router = useRouter()
 
     const handleClick = async (e) => {
         e.preventDefault();
         if (!username || !password) {
            return console.log("Please fill in all fields")
         }
-        await handleLogin(username,password)
+        const redirect = await handleLogin(username,password)
+        if (redirect){
+          router.push(redirect)
+        }
     }
   return (
     <div>

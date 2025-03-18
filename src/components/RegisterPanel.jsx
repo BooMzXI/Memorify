@@ -3,16 +3,23 @@
 import React from "react"
 import Link from "next/link"
 import { handleRegister } from "@/function/StoredUser"
+import { useRouter } from "next/navigation"
 
 const RegisterPanel = () => {
     const [regUser , setRegUser] = React.useState('')
     const [regPass , setRegPass] = React.useState('')
+    const router = useRouter()
+
     const handleRegSubmit = async (e) => {
         e.preventDefault();
         if (!regUser || !regPass) {
             return alert("Please fill in all fields")
         }
-        await handleRegister(regUser , regPass)
+        const redirectUrl = await handleRegister(regUser , regPass)
+        console.log('Redirect URL:', redirectUrl);
+        if (redirectUrl) {
+          router.push(redirectUrl)
+        }
     }
   return (
     <div>

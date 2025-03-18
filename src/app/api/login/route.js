@@ -13,7 +13,7 @@ export async function POST(req) {
             return Response.json({success: false, error: "Wrong password"})
         }
         await createSession(account.username)
-        return Response.json({success: true})
+        return Response.json({success: true, redirectUrl: '/home'})
     } catch (error) {
         return Response.json({ success: false, error: "An error occurred during login." })
     }

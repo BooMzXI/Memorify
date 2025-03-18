@@ -1,6 +1,6 @@
 export const handleRegister = async (regUser , regPass) => {
     try {
-        const res = await fetch('api/register' , {
+        const res = await fetch('/api/register' , {
             method: "POST",
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ user: regUser , password: regPass })
@@ -13,8 +13,7 @@ export const handleRegister = async (regUser , regPass) => {
         if (!data.success) {
             return console.log('Error to register ' + data.error)
         }
-        console.log("Congratulations success register")
-        window.location.href = "/"
+        return data.redirectUrl
     } catch (err) {
         return console.log(err)
     }
@@ -22,7 +21,7 @@ export const handleRegister = async (regUser , regPass) => {
 
 export const handleLogin = async (username , password) => {
     try {
-        const res = await fetch('api/login' , {
+        const res = await fetch('/api/login' , {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ username , password })
@@ -32,12 +31,10 @@ export const handleLogin = async (username , password) => {
                 throw new Error(errorData.error || "Failed to login");
             }
         const data = await res.json()
-        console.log(data)
         if(!data.success){
             return alert("Incorrect username or password")
         }
-        console.log("Success login")
-        window.location.href = "/home"
+        return data.redirectUrl
     } catch (err) {
         return console.log(err)
     }
