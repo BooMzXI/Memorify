@@ -1,14 +1,13 @@
 import Tag from "./Tag";
 import '@/app/googleFont.css'
 
-const DataBox = ({ title, description, image, tag, timestamp,loadContent }) => {
+const DataBox = ({ title, description, image, tag, timestamp, loadContent, id }) => {
   const handleDelete = async () => {
     try {
-      const localTimestamp = new Date(timestamp).toLocaleString('en-CA', { timeZone: 'Asia/Bangkok' }).replace(',', '');
       const res = await fetch('/api/content/delete', {
         method: "DELETE",
         headers: {"Content-Type" : "application/json"},
-        body: JSON.stringify({ title , timestamp: localTimestamp })
+        body: JSON.stringify({ id: id })
       })
       if (!res.ok) {
         return console.log("Error to delete data")

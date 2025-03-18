@@ -80,6 +80,7 @@ const ShowContent = () => {
             image={val.image}
             tag={val.tag}
             timestamp={val.timestamp}
+            id={val.id}
             loadContent={loadContent} />
           ))}
         </div>
