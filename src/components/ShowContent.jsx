@@ -4,7 +4,6 @@ import React from "react";
 import DataBox from "./DataBox";
 import SortedBox from "./Sorted";
 import AddNewData from "./AddNewData";
-import '@/app/ResponsivePage.css';
 import './Effect.css'
 import ActivitiesPanel from "./MB_ActivitiesDialog";
 import { Time } from "@/app/function/Time"
@@ -71,7 +70,7 @@ const ShowContent = () => {
           <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
 
-        <div className="w-full h-full pt-4 flex flex-col p-2 overflow-y-auto">
+        <div className="w-full h-full pt-4 flex flex-col p-2 overflow-y-auto overflow-x-hidden">
           {filteredContents.map((val, index) => (
             <DataBox 
             key={index} 

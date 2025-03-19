@@ -60,14 +60,14 @@ const DataBox = ({ title, description, image, tag, timestamp, loadContent, id })
             </div>
   
             {/* Description */}
-            <div className="w-full h-2/6">
-              <div className="w-full h-[70%] p-1 text-[14px]">
+            <div className="w-full flex-1">
+              <div className="w-full p-1 text-[14px] flex flex-wrap overflow-y-auto overflow-x-hidden">
                 {description}
               </div>
             </div>
   
             {/* Tags */}
-            <div className="w-full h-2/6">
+            <div className="w-full flex-1">
               <div className="w-full h-[30%] p-2 mb-1">
                 <b>Tags</b>
               </div>
