@@ -43,7 +43,7 @@ const AddNewData = ({ isAddDialogVisible , setIsAddDialogVisible, loadContent , 
                 })
             })
         } catch (error) {
-            alert(error);
+            console.log(error)
         }
         setIsAddDialogVisible(false);
         setTitle("");
