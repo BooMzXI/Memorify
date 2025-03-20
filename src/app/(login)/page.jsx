@@ -1,6 +1,5 @@
 
 import React from "react";
-import Alert from "@/components/Alert";
 import LoginPanel from "@/components/LoginPanel"
 import Blur from "@/components/Blur";
 

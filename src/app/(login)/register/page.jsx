@@ -1,4 +1,4 @@
-import RegisterPanel from "@/components/registerPanel";
+import RegisterPanel from "@/components/RegisterPanel";
 
 export default function LoginPage() {
   return (
